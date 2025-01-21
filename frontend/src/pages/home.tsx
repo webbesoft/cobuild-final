@@ -2,7 +2,7 @@
 type Props = {};
 
 function Home({}: Props) {
-  return <div>Home</div>;
+  return <div className="flex items-center justify-center text-2xl">Home</div>;
 }
 
 export default Home;
