@@ -7,10 +7,11 @@ import {
 
 export default [
   index("./pages/home.tsx"),
-  route("about", "./about.tsx"),
 
-  layout("./dashboard/layout.tsx", [
-    route("login", "./auth/login.tsx"),
-    route("register", "./auth/register.tsx"),
+  layout("./layouts/dashboard.tsx", [
+    route("login", "./pages/auth/login.tsx"),
+    route("register", "./pages/auth/register.tsx"),
   ]),
+
+  route("*?", "catchall.tsx"),
 ] satisfies RouteConfig;
