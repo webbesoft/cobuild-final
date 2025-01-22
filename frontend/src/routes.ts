@@ -8,9 +8,12 @@ import {
 export default [
   index("./pages/home.tsx"),
 
+  // authentication
+  route("login", "./pages/auth/login.tsx"),
+  route("register", "./pages/auth/register.tsx"),
+
   layout("./layouts/dashboard.tsx", [
-    route("login", "./pages/auth/login.tsx"),
-    route("register", "./pages/auth/register.tsx"),
+    route("dashboard", "./pages/dashboard/index.tsx"),
   ]),
 
   route("*?", "catchall.tsx"),

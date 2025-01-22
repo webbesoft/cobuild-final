@@ -18,6 +18,12 @@ export default {
         textLight: "#f9feff",
         darkened: "#030f11",
       },
+      // potential brand colors
+      // #e8e4db
+      // #4f6f81
+      // #617e8f
+      // #748e9d
+      // #879eac
     },
   },
   plugins: [],
