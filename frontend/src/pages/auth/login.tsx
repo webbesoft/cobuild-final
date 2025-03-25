@@ -1,15 +1,29 @@
-import { useActionData } from "react-router";
+import { Form, redirect, useActionData } from "react-router";
+import AuthService from "../../services/AuthService";
 
 type Props = {};
 
-// export async function action({ request }) {
-//   const body = await request.formData();
-//   const name = body.get("visitorsName");
-//   return { message: `Hello, ${name}` };
-// }
+export async function action({ request }) {
+  const body = await request.formData();
 
-export default function Component(props: Props) {
+  const username = body.get("username");
+  const password = body.get("password");
+
+  const response = await AuthService.login({ username, password });
+
+  console.log("response: ", response);
+
+  if (response.status != 200) {
+    return response;
+  }
+
+  return redirect("/dashboard");
+}
+
+export default function Login({ actionData }) {
   const data = useActionData;
+
+  console.log("action data: ", data);
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -25,7 +39,7 @@ export default function Component(props: Props) {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action="#" method="POST">
+        <Form className="space-y-6" method="post">
           <div>
             <label
               htmlFor="email"
@@ -82,7 +96,7 @@ export default function Component(props: Props) {
               Sign in
             </button>
           </div>
-        </form>
+        </Form>
 
         <p className="mt-10 text-center text-sm/6 text-gray-500">
           Not a member?

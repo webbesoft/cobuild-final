@@ -33,7 +33,7 @@ export default class HttpClient {
         "Content-Type": "application/json",
         ...requestHeaders,
       },
-      credentials: "include", // For sending cookies with requests
+      credentials: "include",
     };
 
     if (body) {
@@ -43,10 +43,10 @@ export default class HttpClient {
     const response = await fetch(url, options);
 
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      console.error(Error(`HTTP error! Status: ${response.status}`));
     }
 
-    return response.json(); // Assuming the backend returns JSON
+    return response.json();
   }
 
   get(path: string, headers?: Record<string, string>) {

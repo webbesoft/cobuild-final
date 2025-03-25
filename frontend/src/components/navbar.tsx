@@ -1,4 +1,17 @@
+import { useLoaderData } from "react-router";
+import { requireUser } from "../utils/requireUser";
+
+export async function loader({ request }: { request: Request }) {
+  console.log("request: ", request);
+  const user = await requireUser(request);
+  return user;
+}
+
 export default function NavBar() {
+  const user = useLoaderData();
+
+  console.log("user: ", user);
+
   return (
     <div>
       {/* navigation */}
@@ -160,7 +173,39 @@ export default function NavBar() {
           </a>
         </div>
 
-        <div className="hidden md:flex md:flex-1 md:justify-end"></div>
+        <div className="hidden md:flex md:flex-1 md:justify-end gap-2">
+          {user ? (
+            <div className="flex gap-2">
+              <a
+                href="/dashboard"
+                className="text-sm/6 font-semibold text-gray-900 bg-accent p-2"
+              >
+                Home
+              </a>
+              <a
+                href="logout"
+                className="text-sm/6 font-semibold text-gray-900 bg-red-400 rounded-md p-2"
+              >
+                Logout
+              </a>
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <a
+                href="login"
+                className="text-sm/6 font-semibold text-white rounded-md bg-primary p-2"
+              >
+                Login
+              </a>
+              <a
+                href="signup"
+                className="text-sm/6 font-semibold text-gray-900 rounded-md bg-secondary p-2"
+              >
+                Register
+              </a>
+            </div>
+          )}
+        </div>
       </nav>
     </div>
   );
